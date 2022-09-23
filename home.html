@@ -5,62 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>punny web first</title>
-</head>
-<body>
-    <form>
-          <table>
-                <tbody>
-                    <tr>
-                        <td>UTS</td>
-                        <td>:</td>
-                        <td><input type="text" name="" class="form-control" id=""></td>
-                    </tr>
-                    <tr>
-                        <td>Tugas</td>
-                        <td>:</td>
-                        <td><input type="text" name="" class="form-control" id=""></td>
-                    </tr>
-                    <tr>
-                        <td>UAS</td>
-                        <td>:</td>
-                        <td><input type="text" name="" class="form-control" id=""></td>
-                    </tr>
-                    <tr>
-                        <td><button class="btn btn-primary">Hasil</button></td>
-                    </tr>
-                    <tr>
-                        <td>Hitungan: </td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>Berat Badan</td>
-                        <td>:</td>
-                        <td><input type="text" name="" class="form-control" id=""></td>
-                    </tr>
-                    <tr>
-                        <td>Tinggi Badan</td>
-                        <td>:</td>
-                        <td><input type="text" name="" class="form-control" id=""></td>
-                    </tr>
-                    <tr>
-                        <td><button class="btn btn-primary">Hasil</button></td>
-                    </tr>
-                    <tr>
-                        <td>BMI: </td>
-                    </tr>
-                    <tr>
-                        <td>Kategori: </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
     <style>
         body{
             font-family: sans-serif;
+            background: rgb(71, 66, 66);
+            color: white;
         }
         input[type="text"]{
             background-color: #daeaee;
@@ -70,7 +19,7 @@
             padding: 5px;
             border-radius: 4px;
             font-size: 17px;
-            
+
         }
         button{
             background-color: rgb(4, 134, 169);
@@ -82,8 +31,119 @@
             font-size: 17px;
         }
     </style>
-    <script>
+</head>
+<body>
+    <form name="form" action="javascript:void(0);">
+          <table>
+                <tbody>
+                    <tr>
+                        <td>Nilai UTS</td>
+                        <td>:</td>
+                        <td><input type="text" name="uts" id="uts"></td>
+                    </tr>
+                    <tr>
+                        <td>Nilai Tugas</td>
+                        <td>:</td>
+                        <td><input type="text" name="tugas" id="tugas"></td>
+                    </tr>
+                    <tr>
+                        <td>Nilai UAS</td>
+                        <td>:</td>
+                        <td><input type="text" name="uas" id="uas"></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="nilaiakhir();">Hitung hasil</button></td>
+                    </tr>
+                    <tr>
+                        <td><div id="hasil_nilai">test</div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Berat Badan</td>
+                        <td>:</td>
+                        <td><input type="text" name="beratBadan" id="beratBadan"></td>
+                    </tr>
+                    <tr>
+                        <td>Tinggi Badan</td>
+                        <td>:</td>
+                        <td><input type="text" name="tinggiBadan" id="tinggiBadan"></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="hasilbmi();">Hitung BMI</button></td>
+                    </tr>
+                    <tr>
+                        <td><div id="hasil_bmi">BMI test</div></td>
+                    </tr>
+                    <tr>
+                        <td><div id="kategori">kategori test</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
 
+    <script>
+        //project nilai UTS UAS Tugas
+        function nilaiakhir() {
+            let uts = document.getElementById("uts").value // UTS UAS Tugas
+            let tugas = document.getElementById("tugas").value
+            let uas = document.getElementById("uas").value
+            var grade = "";
+            let nilai_akhir = (parseInt(uts)*30/100) + (parseInt(tugas)*40/100) + (parseInt(uas)*30/100)
+            if((nilai_akhir >= 80) && (nilai_akhir <= 100)){
+                grade = "A"
+            }
+            else if((nilai_akhir >= 70) && (nilai_akhir <=79)){
+                grade = "B"
+            }
+            else if((nilai_akhir >= 60) && (nilai_akhir <=69)){
+                grade = "C"
+            }
+            else if((nilai_akhir >= 40) && (nilai_akhir <=59)){
+                grade = "D"
+            }
+            else{
+                grade = "E"
+            }
+
+            document.getElementById("hasil_nilai").innerHTML = "Nilai Huruf : " + grade;
+        }
+
+        //Project Hitung Timbangan BMI
+        function hasilbmi() {
+            let beratBadan = document.getElementById("beratBadan").value
+            let tinggiBadan = document.getElementById("tinggiBadan").value
+
+            var kategori = "";
+            let hasil_akhir = (parseInt(beratBadan)) / (parseInt(tinggiBadan).Math.pow(2));
+
+            if (hasil_akhir >= 29){
+                kategori = "Obesitas"
+            }
+            else if((hasil_akhir >= 24) && (hasil_akhir <= 29)){
+                kategori = "kelebihan berat badan (overweight)"
+            }
+            else if((hasil_akhir >= 18.5) && (hasil_akhir <= 23.99)){
+                kategori = "Normal" 
+            }
+            else if((hasil_akhir >= 15) && (hasil_akhir <= 18.49)){
+                kategori = "berat badan berkurang (underweight)"
+            }
+            else if(hasil_akhir <= 15){
+                kategori = "berat badan sangat kurang"
+            }
+            else{
+                kategori = "kosong"
+            }
+
+            document.getElementById("hasil_bmi").innerHTML = "BMI = " + hasil_akhir;
+            document.getElementById("kategori").innerHTML = "Kategori : " + kategori;       
+        }
+
+        
     </script>
 </body>
 </html>
