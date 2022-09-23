@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>punny web first</title>
+    <title>Body Mass Index</title>
     <style>
         body{
             font-family: sans-serif;
             background: rgb(71, 66, 66);
             color: white;
         }
-        input[type="text"]{
+        table:nth-child(1){
+            border-bottom: 2px solid #fff;
+        }
+        input[type="text"],
+        input[type="number"]{
             background-color: #daeaee;
             outline: none;
             border: none;
@@ -25,6 +29,7 @@
             background-color: rgb(4, 134, 169);
             outline: none;
             border: none;
+            margin: 6px;
             padding: 8px;
             border-radius: 4px;
             color: white;
@@ -52,34 +57,43 @@
                         <td><input type="text" name="uas" id="uas"></td>
                     </tr>
                     <tr>
+                        <td></td>
+                        <td></td>
                         <td><button onclick="nilaiakhir();">Hitung hasil</button></td>
                     </tr>
                     <tr>
-                        <td><div id="hasil_nilai">test</div></td>
+                        <td></td>
+                        <td></td>
+                        <td><div id="hasil_nilai">Nilai Huruf : </div></td>
                     </tr>
                 </tbody>
             </table>
-            <hr>
             <table>
                 <tbody>
                     <tr>
                         <td>Berat Badan</td>
                         <td>:</td>
-                        <td><input type="text" name="beratBadan" id="beratBadan"></td>
+                        <td><input type="number" name="beratBadan" id="beratBadan"></td>
                     </tr>
                     <tr>
                         <td>Tinggi Badan</td>
                         <td>:</td>
-                        <td><input type="text" name="tinggiBadan" id="tinggiBadan"></td>
+                        <td><input type="number" name="tinggiBadan" id="tinggiBadan"></td>
                     </tr>
                     <tr>
+                        <td></td>
+                        <td></td>
                         <td><button onclick="hasilbmi();">Hitung BMI</button></td>
                     </tr>
                     <tr>
-                        <td><div id="hasil_bmi">BMI test</div></td>
+                        <td></td>
+                        <td></td>
+                        <td><div id="hasil_bmi">BMI = </div></td>
                     </tr>
                     <tr>
-                        <td><div id="kategori">kategori test</div></td>
+                        <td></td>
+                        <td></td>
+                        <td><div id="kategori">kategori : </div></td>
                     </tr>
                 </tbody>
             </table>
@@ -108,19 +122,18 @@
             else{
                 grade = "E"
             }
-
             document.getElementById("hasil_nilai").innerHTML = "Nilai Huruf : " + grade;
         }
 
         //Project Hitung Timbangan BMI
         function hasilbmi() {
-            let beratBadan = document.getElementById("beratBadan").value
-            let tinggiBadan = document.getElementById("tinggiBadan").value
-
+            let beratBadan = parseFloat(document.getElementById("beratBadan").value);
+            let tinggiBadan = parseFloat(document.getElementById("tinggiBadan").value);
+            let kuadratTinggi = tinggiBadan * tinggiBadan;
             var kategori = "";
-            let hasil_akhir = (parseInt(beratBadan)) / (parseInt(tinggiBadan).Math.pow(2));
+            let hasil_akhir = beratBadan / kuadratTinggi;
 
-            if (hasil_akhir >= 29){
+            if (hasil_akhir > 29){
                 kategori = "Obesitas"
             }
             else if((hasil_akhir >= 24) && (hasil_akhir <= 29)){
@@ -132,18 +145,15 @@
             else if((hasil_akhir >= 15) && (hasil_akhir <= 18.49)){
                 kategori = "berat badan berkurang (underweight)"
             }
-            else if(hasil_akhir <= 15){
+            else if(hasil_akhir < 15){
                 kategori = "berat badan sangat kurang"
             }
             else{
                 kategori = "kosong"
             }
-
-            document.getElementById("hasil_bmi").innerHTML = "BMI = " + hasil_akhir;
+            document.getElementById("hasil_bmi").innerHTML = "BMI = " + hasil_akhir.toFixed(6);
             document.getElementById("kategori").innerHTML = "Kategori : " + kategori;       
         }
-
-        
     </script>
 </body>
 </html>
